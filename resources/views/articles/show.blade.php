@@ -8,3 +8,4 @@
     <input type="submit" value="Supprimer l'article">
 </form>
 
+<a href="{{ route('articles.edit', $article) }}">Modifier cet article</a>
