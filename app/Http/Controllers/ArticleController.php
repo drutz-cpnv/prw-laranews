@@ -12,7 +12,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::unarchived();
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -62,7 +62,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+        $article->archive();
         return redirect()->route('articles.index');
     }
 }
