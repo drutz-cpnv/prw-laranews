@@ -1,11 +1,11 @@
-<h1>Modifier l'article</h1>
+@extends('layout')
 
-<form method="POST" action="{{ route('articles.update', $article) }}">
-    @method('PUT')
-    @csrf
-    <input type="text" name="title" value="{{ $article->title }}">
-    <textarea name="body">
-        {{ $article->body }}
-    </textarea>
-    <input type="submit" value="Modifier">
-</form>
+@section('content')
+    <h1>Modifier l'article</h1>
+    <form method="POST" action="{{ route('articles.update', $article) }}">
+        @method('PUT')
+        @csrf
+        @include('articles.fields')
+        <input type="submit" value="Modifier">
+    </form>
+@endsection

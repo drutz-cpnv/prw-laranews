@@ -1,9 +1,10 @@
-<h1>Nouvel article</h1>
+@extends('layout')
 
-<form method="POST" action="{{ route('articles.store') }}">
-    @csrf
-    <input type="text" name="title">
-    <textarea name="body">
-    </textarea>
-    <input type="submit" value="Créer">
-</form>
+@section('content')
+    <h1>Nouvel article</h1>
+    <form method="POST" action="{{ route('articles.store') }}">
+        @csrf
+        @include('articles.fields')
+        <input type="submit" value="Ajouter">
+    </form>
+@endsection
