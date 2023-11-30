@@ -3,19 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Article extends Model
 {
     protected $fillable = ['title', 'body', 'published_at', 'archived_at'];
 
-    public static function unarchived()
+    public function scopeUnarchived(Builder $query)
     {
-        return self::whereNull('archived_at')->get();
+        $query->whereNull('archived_at');
     }
 
-    public static function archived()
+    public function scopeArchived(Builder $query)
     {
-        return self::whereNotNull('archived_at')->get();
+        $query->whereNotNull('archived_at');
+    }
+
+    public function scopeSearchBody(Builder $query, $search)
+    {
+        $query->where('body', 'LIKE', "%$search%");
     }
 
     public function archive()
