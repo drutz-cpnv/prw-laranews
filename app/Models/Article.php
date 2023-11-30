@@ -13,6 +13,11 @@ class Article extends Model
         return self::whereNull('archived_at')->get();
     }
 
+    public static function archived()
+    {
+        return self::whereNotNull('archived_at')->get();
+    }
+
     public function archive()
     {
         $this->timestamps = false;
