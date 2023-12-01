@@ -15,12 +15,13 @@
 
     <h3>Commentaires</h3>
 
-    <form method="POST" action="{{ route('articles.comments.store', $article) }}">
-        @csrf
-        <textarea name="body">
-        </textarea>
-        <input type="submit" value="Ajouter le commentaire">
-    </form>
+    @unless ($article->archived_at)
+        <form method="POST" action="{{ route('articles.comments.store', $article) }}">
+            @csrf
+            <textarea name="body"></textarea>
+            <input type="submit" value="Ajouter le commentaire">
+        </form>
+    @endunless
 
     <ul>
     @foreach ($article->comments as $comment)

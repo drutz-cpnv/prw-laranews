@@ -13,6 +13,9 @@ class CommentController extends Controller
      */
     public function store(Article $article, Request $request)
     {
+        if ($article->archived_at)
+            abort(403);
+
         $article->comments()->create($request->all());
         return redirect()->route('articles.show', $article);
     }
