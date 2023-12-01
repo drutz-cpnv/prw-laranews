@@ -12,4 +12,22 @@
     </form>
 
     <a href="{{ route('articles.edit', $article) }}">Modifier cet article</a>
+
+    <h3>Commentaires</h3>
+
+    <form method="POST" action="{{ route('articles.comments.store', $article) }}">
+        @csrf
+        <textarea name="body">
+        </textarea>
+        <input type="submit" value="Ajouter le commentaire">
+    </form>
+
+    <ul>
+    @foreach ($article->comments as $comment)
+        <li>
+            <p>{{ $comment->body  }}</p>
+        </li>
+    @endforeach
+    </ul>
+
 @endsection

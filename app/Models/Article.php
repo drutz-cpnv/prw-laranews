@@ -9,6 +9,11 @@ class Article extends Model
 {
     protected $fillable = ['title', 'body', 'published_at', 'archived_at'];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeUnarchived(Builder $query)
     {
         $query->whereNull('archived_at');
