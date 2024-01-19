@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 
@@ -25,7 +26,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create', ['article' => new Article()]);
+        return view('articles.create', ['article' => new Article(), 'tags' => Tag::all()]);
     }
 
     /**
@@ -33,7 +34,9 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create($request->all());
+        $article = Article::create($request->all());
+        /*$article->tag()->associate(Tag::find($request->get('tag')));
+        $article->save();*/
         return redirect()->route('articles.index');
     }
 
@@ -50,7 +53,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        return view('articles.edit', ['article' => $article, 'tags' => Tag::all()]);
     }
 
     /**

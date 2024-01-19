@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'body', 'published_at', 'archived_at'];
+    protected $fillable = ['title', 'body', 'published_at', 'archived_at', 'tag_id'];
 
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 
     public function scopeUnarchived(Builder $query)
